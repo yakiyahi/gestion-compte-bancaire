@@ -90,15 +90,15 @@ public class RetraitService {
         }else if(mont_amodifier > montant_int){
             ecart_mont = mont_amodifier - montant_int;
             // le montant final est l'ecart entre le montant initial et le monatant a modifier plus ajouté au montant initial
-            long solde_final = solde + ecart_mont;
+            long solde_final = solde - ecart_mont;
             cli.setSolde(solde_final);
             clientRepository.save(cli);
         }
 
         retr.setClient(cli);
         retr.setMontantRettrait(retrait.getMontantRettrait());
-        retr.setDateRetrait(retr.getDateRetrait());
-        retr.setNumCheck(retr.getNumCheck());
+        retr.setDateRetrait(retrait.getDateRetrait());
+        retr.setNumCheck(retrait.getNumCheck());
         return retraitRepository.save(retr);
     }
     //Suppression d'un client
