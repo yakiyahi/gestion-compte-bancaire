@@ -3,7 +3,6 @@ package com.yakiyahi.ProjectApiRest;
 import com.yakiyahi.ProjectApiRest.dao.ClientRepository;
 import com.yakiyahi.ProjectApiRest.dao.RetraitRepository;
 import com.yakiyahi.ProjectApiRest.dao.VersementRepository;
-import com.yakiyahi.ProjectApiRest.entities.Client;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

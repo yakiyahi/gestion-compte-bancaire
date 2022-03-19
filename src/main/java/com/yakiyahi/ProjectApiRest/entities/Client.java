@@ -11,6 +11,7 @@ import java.util.Collection;
 @Entity
 @Data
 @NoArgsConstructor @AllArgsConstructor
+@ToString
 public class Client {
     @Id
     @Column(length=50)

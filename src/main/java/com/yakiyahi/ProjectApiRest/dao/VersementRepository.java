@@ -10,6 +10,7 @@ import java.util.List;
 
 @RepositoryRestResource
 public interface VersementRepository extends JpaRepository <Versement,Long>{
+
     @Query("select v from Versement v where v.client.numCpte like :x ")
     public List<Versement> rechVers(@Param("x")String motCle);
 

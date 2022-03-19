@@ -67,7 +67,7 @@ public class RetraitService {
 
         Client cli = retrait.getClient();
 
-        long montant_int = retrait.getMontantRettrait();
+        long montant_int = retr.getMontantRettrait();
         long mont_amodifier = retrait.getMontantRettrait();
         long solde = cli.getSolde();
 
