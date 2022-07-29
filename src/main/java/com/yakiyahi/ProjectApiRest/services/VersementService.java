@@ -8,6 +8,7 @@ import com.yakiyahi.ProjectApiRest.entities.Versement;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.sql.Date;
 import java.util.List;
 
 @RestController
@@ -22,12 +23,21 @@ public class VersementService {
     @RequestMapping(value = "/versparmotcle/{motCle}",method = RequestMethod.GET)
     public List<Versement> RechVers(@PathVariable String motCle){
        try {
-
-           return versementRepository.rechVers(motCle);
+           return versementRepository.rechVers("%"+motCle+"%");
        }catch (Exception e){
            e.printStackTrace();
            return null;
        }
+
+    }
+    @RequestMapping(value = "/verspardate/{date}",method = RequestMethod.GET)
+    public List<Versement> RechVersByDate(@PathVariable String date){
+        try {
+            return versementRepository.rechVersByDate(Date.valueOf(date));
+        }catch (Exception e){
+            e.printStackTrace();
+            return null;
+        }
 
     }
 

@@ -1,8 +1,12 @@
 package com.yakiyahi.ProjectApiRest.services;
 
 import com.yakiyahi.ProjectApiRest.dao.ClientRepository;
+import com.yakiyahi.ProjectApiRest.dao.RetraitRepository;
+import com.yakiyahi.ProjectApiRest.dao.VersementRepository;
 import com.yakiyahi.ProjectApiRest.entities.Client;
+import com.yakiyahi.ProjectApiRest.entities.Retrait;
 import com.yakiyahi.ProjectApiRest.entities.Transfert;
+import com.yakiyahi.ProjectApiRest.entities.Versement;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,6 +17,9 @@ import java.util.List;
 public class ClientService {
     @Autowired
     ClientRepository clientRepository;
+    VersementRepository versementRepository;
+    RetraitRepository retraitRepository;
+
     //Recherche d une direction
     @RequestMapping(value = "/clientparmotcle/{motCle}",method = RequestMethod.GET)
     public List<Client> RechClient(@PathVariable String motCle){
@@ -28,6 +35,10 @@ public class ClientService {
 
     }
 
+    @RequestMapping(value = "/graphs",method = RequestMethod.GET)
+    public List<String> getGraphsInfo(){
+        return clientRepository.grah();
+    }
     @RequestMapping(value = "/allNumsComptes",method = RequestMethod.GET)
     public List<String> getAllNumsClients(){
         return clientRepository.numsClients();
@@ -48,8 +59,15 @@ public class ClientService {
     }
     @RequestMapping(value = "/allclients",method = RequestMethod.POST)
     public Client addClient(@RequestBody Client client){
+        try {
+            Long sole =client.getSolde() ;
+            return clientRepository.save(client);
+        }catch (Exception e){
+            return null;
 
-        return clientRepository.save(client);
+        }
+
+
     }
     //Suppression d'un client
     @RequestMapping(value = "/allclients/{num_cpte}",method = RequestMethod.DELETE)
@@ -57,8 +75,9 @@ public class ClientService {
         try{
             clientRepository.deleteById(num_cpte);
             return "SUCCESS";
+
         }catch (Exception e){
-            System.out.println(e.getMessage());
+
             return "ERROR";
         }
     }

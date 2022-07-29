@@ -16,4 +16,7 @@ public interface ClientRepository extends JpaRepository<Client,String> {
     public List<Client> rechClient(@Param("x")String motCle);
     @Query("select c.numCpte from Client c order by c.numCpte DESC")
     public List<String> numsClients();
+
+    @Query("select c.nomCli ,c.solde from Client c order by c.solde ")
+    List<String> grah();
 }

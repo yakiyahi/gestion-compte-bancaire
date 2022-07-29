@@ -8,6 +8,7 @@ import com.yakiyahi.ProjectApiRest.entities.Versement;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.sql.Date;
 import java.util.List;
 @RestController
 @CrossOrigin("*")
@@ -22,7 +23,18 @@ public class RetraitService {
     public List<Retrait> RechRetrait(@PathVariable String motCle){
         try {
 
-            return retraitRepository.rechRetrait(motCle);
+            return retraitRepository.rechRetrait("%"+motCle+"%");
+        }catch (Exception e){
+            e.printStackTrace();
+            return null;
+        }
+
+    }
+    @RequestMapping(value = "/retraitpardate/{date}",method = RequestMethod.GET)
+    public List<Retrait> RechRetraitParDate(@PathVariable String date){
+        try {
+
+            return retraitRepository.rechRetraitByDate(Date.valueOf(date));
         }catch (Exception e){
             e.printStackTrace();
             return null;

@@ -1,13 +1,11 @@
 package com.yakiyahi.ProjectApiRest;
-
-import com.yakiyahi.ProjectApiRest.dao.ClientRepository;
-import com.yakiyahi.ProjectApiRest.dao.RetraitRepository;
-import com.yakiyahi.ProjectApiRest.dao.VersementRepository;
+import com.yakiyahi.ProjectApiRest.services.interfaces.UserService;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
-import org.springframework.data.rest.core.config.RepositoryRestConfiguration;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 @SpringBootApplication
 public class ProjectApiRestApplication {
@@ -15,12 +13,15 @@ public class ProjectApiRestApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(ProjectApiRestApplication.class, args);
 	}
+
 	@Bean
-	CommandLineRunner start(ClientRepository clientRepository, RetraitRepository retraitRepository, VersementRepository versementRepository, RepositoryRestConfiguration repositoryRestConfiguration){
+	public PasswordEncoder passwordEncoder(){
+		return new BCryptPasswordEncoder();
+	}
+
+	@Bean
+	CommandLineRunner start(UserService userService){
 		return args -> {
-
-
- 			System.out.println(clientRepository.findAll());
 
 		};
 	}
