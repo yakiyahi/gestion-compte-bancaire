@@ -1,0 +1,33 @@
+version: '3.1'
+services:
+  API:
+    image: gest-bank-api.jar
+    build: .
+    ports:
+      - "8080:8080"
+    depends_on:
+      PostgreSQL:
+        condition: service_healthy
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://PostgreSQL/gestion_bank
+      - SPRING_DATASOURCE_PASSWORD=yakiyahi
+      - SPRING_DATASOURCE_USER=postgres
+      - SPRING_JPA_HIBERNATE_DDL_AUTO=update
+
+  PostgreSQL:
+    image: postgres
+    volumes:
+      - /postgres-data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_PASSWORD=yakiyahi
+      - POSTGRES_USER=postgres
+      - POSTGRES_DB=gestion_bank
+    healthcheck :
+      test: ["CMD-SHELL","pg_isready -U postgres"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+

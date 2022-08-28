@@ -1,7 +1,6 @@
 package com.yakiyahi.ProjectApiRest.entities;
 
 import lombok.Data;
-import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 import javax.persistence.Entity;
@@ -13,10 +12,6 @@ import javax.persistence.Id;
 @Data
 @ToString
 public class UsrRole {
-    public UsrRole() {
-        super();
-    }
-
     public UsrRole(Long roleId, String roleName) {
         this.roleId = roleId;
         this.roleName = roleName;

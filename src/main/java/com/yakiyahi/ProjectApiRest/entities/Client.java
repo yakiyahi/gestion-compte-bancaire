@@ -1,16 +1,13 @@
 package com.yakiyahi.ProjectApiRest.entities;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.Collection;
 
 @Entity
 @Data
-
+@Builder
 public class Client {
     @Id
     @Column(length=50)
@@ -27,6 +24,9 @@ public class Client {
         this.numCpte = numCpte;
         this.nomCli = nomCli;
         this.solde = solde;
+    }
+    public Client(String numCpte, String nomCli){
+        this(numCpte,nomCli, 0L);
     }
 
     public String getNumCpte() {
