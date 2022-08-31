@@ -37,12 +37,15 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 
         http.authorizeHttpRequests().antMatchers(HttpMethod.POST,"/*").hasAnyAuthority("ROLE_ADMIN","ROLE_SUPER_ADMIN");
+        http.authorizeHttpRequests().antMatchers(HttpMethod.POST,"/*/*").hasAnyAuthority("ROLE_ADMIN","ROLE_SUPER_ADMIN");
+        http.authorizeHttpRequests().antMatchers(HttpMethod.POST,"/allusers/save").hasAnyAuthority("ROLE_ADMIN","ROLE_SUPER_ADMIN");
 
         http.authorizeHttpRequests().antMatchers(HttpMethod.DELETE,"/*").hasAnyAuthority("ROLE_ADMIN","ROLE_SUPER_ADMIN");
         http.authorizeHttpRequests().antMatchers(HttpMethod.DELETE,"/all*/*").hasAnyAuthority("ROLE_ADMIN","ROLE_SUPER_ADMIN");
 
         //configuration du droit pour supprimer et modifier un utilisateur
         http.authorizeHttpRequests().antMatchers(HttpMethod.DELETE,"/*/*/*").hasAnyAuthority("ROLE_ADMIN","ROLE_SUPER_ADMIN");
+        http.authorizeHttpRequests().antMatchers(HttpMethod.PUT,"/*").hasAnyAuthority("ROLE_ADMIN","ROLE_SUPER_ADMIN");
         http.authorizeHttpRequests().antMatchers(HttpMethod.PUT,"/*/*").hasAnyAuthority("ROLE_ADMIN","ROLE_SUPER_ADMIN");
 
         http.authorizeHttpRequests().antMatchers(HttpMethod.GET,"/*").hasAnyAuthority("ROLE_ADMIN","ROLE_SUPER_ADMIN","ROLE_USER","ROLE_CUSTOMER");

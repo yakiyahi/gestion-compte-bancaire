@@ -12,6 +12,10 @@ import javax.persistence.Id;
 @Data
 @ToString
 public class UsrRole {
+    public UsrRole() {
+        super();
+    }
+
     public UsrRole(Long roleId, String roleName) {
         this.roleId = roleId;
         this.roleName = roleName;
